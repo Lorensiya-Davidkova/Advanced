@@ -1,0 +1,35 @@
+import java.util.ArrayDeque;
+import java.util.Scanner;
+
+public class BasicQueueOperations {
+    public static void main(String[] args){
+        Scanner scanner=new Scanner(System.in);
+        String[] line=scanner.nextLine().split(" ");
+        int broi=Integer.parseInt(line[0]);
+        int remove=Integer.parseInt(line[1]);
+        int search=Integer.parseInt(line[2]);
+        ArrayDeque<Integer> queue=new ArrayDeque<>();
+        String[] elements=scanner.nextLine().split(" ");
+        for(int i=0;i<broi;i++){
+            queue.add(Integer.parseInt(elements[i]));
+        }
+        for(int i=0;i<remove;i++){
+            queue.remove();
+        }
+        if(queue.size()==0){
+            System.out.println("0");
+        }else{
+            if(queue.contains(search)){
+                System.out.println(true);
+            }else{
+                int min=Integer.MAX_VALUE;
+                for(int number:queue){
+                    if(number<min){
+                        min=number;
+                    }
+                }
+                System.out.println(min);
+            }
+        }
+    }
+}
