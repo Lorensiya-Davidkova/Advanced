@@ -1,0 +1,84 @@
+import java.util.Scanner;
+public class CompareMatrices {
+    public static void main(String[] args) {
+       Scanner scanner=new Scanner(System.in);
+
+       String size=scanner.nextLine();
+       String[] arrSize=size.split(" ");
+
+       int[][] matrix=new int[Integer.parseInt(arrSize[0])][Integer.parseInt(arrSize[1])];
+       //matrix[3][4]
+        int rows=Integer.parseInt(arrSize[0]);
+        int columns=Integer.parseInt(arrSize[1]);
+
+       for(int i=0;i<rows;i++){
+           String[] rowElementsOfStrings=(scanner.nextLine()).split(" ");
+           int[] rowElements=new int[rowElementsOfStrings.length];
+           for(int p=0;p<rowElements.length;p++){
+               int current=Integer.parseInt(rowElementsOfStrings[p]);
+               rowElements[p]=current;
+           }
+
+           for(int j=0;j<columns;j++){
+               //int[] rowElements={3,4,5,6}
+               matrix[i][j]=rowElements[j];
+           }
+       }
+
+
+       String size1=scanner.nextLine();
+       String[] arrOfsize1=size1.split(" ");
+       int rows1=Integer.parseInt(arrOfsize1[0]);
+       int columns1=Integer.parseInt(arrOfsize1[1]);
+
+       int matrix1[][]=new int[rows1][columns1];
+       for(int i=0;i<rows1;i++){
+           String currentRow=scanner.nextLine();
+           String[] arrCurrentRow=currentRow.split(" ");
+           int[] CurrentRowOfInt=new int[arrCurrentRow.length];
+           for(int p=0;p< arrCurrentRow.length;p++){
+               CurrentRowOfInt[p]=Integer.parseInt(arrCurrentRow[p]);
+           }
+           for(int j=0;j<columns1;j++){
+               matrix1[i][j]=CurrentRowOfInt[j];
+           }
+       }
+
+      /* System.out.println("MATRIX 1");
+       for(int i=0;i<rows;i++){
+           for(int j=0;j<columns;j++){
+               System.out.print(matrix[i][j]+"   ");
+           }
+           System.out.println();
+       }
+      System.out.println("MATRIX 2");
+       for(int i=0;i<rows1;i++){
+           for(int j=0;j<columns1;j++){
+               System.out.print(matrix1[i][j]+"   ");
+           }
+           System.out.println();
+       }*/
+
+        //matrix[rows][columns]
+        //matrix1[rows1][columns1]
+
+        boolean equalsMatrix=true;
+        if((rows1==rows)&&(columns1==columns)){
+            for(int i=0;i<rows;i++){
+                for(int j=0;j<columns;j++){
+                    if(matrix[i][j]!=matrix1[i][j]){
+                        equalsMatrix=false;
+                        break;
+                    }
+                }
+            }
+        }else{
+            equalsMatrix=false;
+        }
+        if(equalsMatrix==true){
+            System.out.println("equal");
+        }else{
+            System.out.println("not equal");
+        }
+    }
+}
