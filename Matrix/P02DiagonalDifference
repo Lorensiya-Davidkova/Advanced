@@ -1,0 +1,34 @@
+import java.util.Scanner;
+public class DiagonalDifference {
+    public static void main(String[] args){
+        Scanner scanner=new Scanner(System.in);
+        int size=Integer.parseInt(scanner.nextLine());
+
+        int [][] matrix=new int[size][size];
+
+        for(int i=0;i<size;i++){
+            String[] arrWords=scanner.nextLine().split(" ");
+            for(int j=0;j<size;j++){
+                matrix[i][j]=Integer.parseInt(arrWords[j]);
+            }
+        }
+
+        int sumGlavenDiagonal=0;
+        int sumVtorostepenenDiagonal=0;
+
+        for(int i=0;i<size;i++){
+            for(int j=0;j<size;j++){
+                if(i==j){
+                    sumGlavenDiagonal=sumGlavenDiagonal+matrix[i][j];
+                }
+            }
+        }
+        int currJ=size-1;
+        for(int i=0;i<size;i++){
+            sumVtorostepenenDiagonal=sumVtorostepenenDiagonal+matrix[i][currJ];
+            currJ--;
+        }
+        int result=sumGlavenDiagonal-sumVtorostepenenDiagonal;
+        System.out.println(Math.abs(result));
+    }
+}
