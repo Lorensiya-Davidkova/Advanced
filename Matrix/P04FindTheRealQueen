@@ -1,0 +1,94 @@
+import java.util.Scanner;
+public class FindTheRealQueen {
+    public static void main(String[] args){
+        Scanner scanner=new Scanner(System.in);
+        char[][] matrix=new char[8][8];
+
+        for(int i=0;i<8;i++) {
+            String[] arrOfChars = scanner.nextLine().split(" ");
+            for (int j = 0; j < 8; j++) {
+                matrix[i][j] = arrOfChars[j].charAt(0);
+            }
+        }
+
+        int counter=0;
+        for(int i=0;i<8;i++){
+            for(int j=0;j<8;j++){
+                if(matrix[i][j]=='q'){
+                    //открита е кралица
+                    //1) проверявма всичко наляво и надясно от нея
+                    for(int left=0;left<j;left++){
+                        if(matrix[i][left]=='q'){
+                            counter++;
+                        }
+                    }
+                    for(int right=j+1;right<8;right++){
+                        if(matrix[i][right]=='q'){
+                            counter++;
+                        }
+                    }
+                    //2) проверяваме нагоре и надолу
+                    for(int top=0;top<i;top++){
+                        if(matrix[top][j]=='q'){
+                            counter++;
+                        }
+                    }
+                    for(int down=i+1;down<8;down++){
+                        if(matrix[down][j]=='q'){
+                            counter++;
+                        }
+                    }
+
+                    //3) проверяваме по дигонали
+                    int downLeftRow=i+1;
+                    int downLeftCol=j-1;
+                    while(downLeftRow<8 && downLeftCol>=0){
+                        if(matrix[downLeftRow][downLeftCol]=='q'){
+                            counter++;
+                            break;
+                        }
+                        downLeftRow++;
+                        downLeftCol--;
+                    }
+
+                    int topRightRow=i-1;
+                    int topRightCol=j+1;
+                    while(topRightRow>=0 && topRightCol<8){
+                        if(matrix[topRightRow][topRightCol]=='q'){
+                            counter++;
+                            break;
+                        }
+                        topRightRow--;
+                        topRightCol++;
+                    }
+
+                    int topLeftRow=i-1;
+                    int topLeftCol=j-1;
+                    while(topLeftRow>=0 && topLeftCol>=0){
+                        if(matrix[topLeftRow][topLeftCol]=='q'){
+                            counter++;
+                            break;
+                        }
+                        topLeftRow--;
+                        topLeftCol--;
+                    }
+
+                    int downRightRow=i+1;
+                    int downRightCol=j+1;
+                    while(downRightRow<8 && downRightCol<8){
+                        if(matrix[downRightRow][downRightCol]=='q'){
+                            counter++;
+                            break;
+                        }
+                        downRightRow++;
+                        downRightCol++;
+                    }
+                    if(counter==0){
+                        System.out.println(i+" "+j);
+                    }
+                    counter=0;
+                }
+            }
+        }
+    }
+}
