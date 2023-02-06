@@ -1,0 +1,34 @@
+import java.util.Scanner;
+public class MatrixOfPalindromes {
+    public static void main(String[] args){
+        Scanner scanner=new Scanner(System.in);
+        String[] arrWord=scanner.nextLine().split(" ");
+        int row=Integer.parseInt(arrWord[0]);
+        int col=Integer.parseInt(arrWord[1]);
+        String[][] matrix=new String[row][col];
+        int firstletter=97;
+        int secondletter=firstletter;
+        int thirdletter=firstletter;
+
+        for(int i=0;i<row;i++){
+            for(int j=0;j<col;j++){
+                String element="";
+                element=element+(char)firstletter;
+                element=element+(char)secondletter;
+                element=element+(char)thirdletter;
+                matrix[i][j]=element;
+                secondletter++;
+            }
+            firstletter++;
+            secondletter=firstletter;
+            thirdletter=firstletter;
+        }
+
+        for(int i=0;i<row;i++){
+            for(int j=0;j<col;j++){
+                System.out.print(matrix[i][j]+" ");
+            }
+            System.out.println();
+        }
+    }
+}
