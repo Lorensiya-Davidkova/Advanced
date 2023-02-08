@@ -1,0 +1,44 @@
+import java.util.Scanner;
+public class MatrixShuffling {
+    public static void main(String[] args){
+        Scanner scanner=new Scanner(System.in);
+        String[] arrSize=scanner.nextLine().split(" ");
+        int rows=Integer.parseInt(arrSize[0]);
+        int cols=Integer.parseInt(arrSize[1]);
+
+        String[][] matrix=new String[rows][cols];
+        for(int i=0;i<rows;i++){
+            String[] rowElements=scanner.nextLine().split(" ");
+            for(int j=0;j<cols;j++){
+                matrix[i][j]=rowElements[j];
+            }
+        }
+        do{
+            String[] arrCommands=scanner.nextLine().split(" ");
+            if(arrCommands[0].equals("swap") & arrCommands.length==5){
+                int firstI=Integer.parseInt(arrCommands[1]);
+                int firstJ=Integer.parseInt(arrCommands[2]);
+                int secondI=Integer.parseInt(arrCommands[3]);
+                int secondJ=Integer.parseInt(arrCommands[4]);
+                if((firstI<=rows-1 && firstI>=0) && (firstJ<=cols-1 && firstJ>=0) && (secondI>=0 && secondI<rows) && (secondJ<cols && secondJ>=0)){
+                    String firstElement=matrix[firstI][firstJ];
+                    String secondElement=matrix[secondI][secondJ];
+                    matrix[firstI][firstJ]=secondElement;
+                    matrix[secondI][secondJ]=firstElement;
+                    for(int i=0;i<rows;i++) {
+                        for (int j = 0; j < cols; j++) {
+                            System.out.print(matrix[i][j] + " ");
+                        }
+                        System.out.println();
+                    }
+                }else{
+                    System.out.println("Invalid input!");
+                }
+            }else if(arrCommands[0].equals("END")){
+                break;
+            }else{
+                System.out.println("Invalid input!");
+            }
+        }while(true);
+    }
+}
