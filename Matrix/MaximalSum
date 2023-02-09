@@ -1,0 +1,49 @@
+import java.util.Scanner;
+public class MaximalSum {
+    public static void main(String[] args){
+       Scanner scanner=new Scanner(System.in);
+       String[] arrSize=scanner.nextLine().split(" ");
+       int rows=Integer.parseInt(arrSize[0]);
+       int cols=Integer.parseInt(arrSize[1]);
+       int[][] matrix=new int[rows][cols];
+       int maxSum=Integer.MIN_VALUE;
+       int maxI=-1;
+       int maxJ=-1;
+
+
+
+       for(int i=0;i<rows;i++){
+           String[] rowElements=scanner.nextLine().split(" ");
+           for(int j=0;j<cols;j++){
+               matrix[i][j]=Integer.parseInt(rowElements[j]);
+           }
+       }
+
+
+        int currSum=0;
+       for(int i=0;i<=rows-3;i++){
+           for(int j=0;j<=cols-3;j++){
+               for(int k=i;k<i+3;k++){
+                   for(int p=j;p<j+3;p++){
+                        currSum=currSum+matrix[k][p];
+                   }
+               }
+               if(maxSum<currSum){
+                   maxSum=currSum;
+                   maxI=i;
+                   maxJ=j;
+               }
+               currSum=0;
+
+           }
+       }
+       System.out.println("Sum = "+maxSum);
+       //System.out.println("["+maxI+"]   "+"["+maxJ+"]");
+        for(int i=maxI;i<maxI+3;i++){
+            for(int j=maxJ;j<maxJ+3;j++){
+                System.out.print(matrix[i][j]+" ");
+            }
+            System.out.println();
+        }
+    }
+}
