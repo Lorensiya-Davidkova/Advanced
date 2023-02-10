@@ -1,0 +1,104 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class StringMatrixRotation {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<String> word = new ArrayList<>();
+
+        String command = scanner.nextLine();
+        String regex = "(Rotate[(](?<degree>[0-9]+)[)])";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(command);
+        int degree = 0;
+        if (matcher.find()) {
+            degree = Integer.parseInt(matcher.group("degree"));
+        }
+        do {
+            String line = scanner.nextLine();
+            if (line.equals("END")) {
+                break;
+            } else {
+                word.add(line);
+            }
+        } while (true);
+
+        int rows = word.size();
+        int maxLenght = 0;
+        for (int i = 0; i < word.size(); i++) {
+            int currentLength = word.get(i).length();
+            if (maxLenght < currentLength) {
+                maxLenght = currentLength;
+            }
+        }
+        int columns = maxLenght;
+        char[][] matrix = new char[rows][columns];
+
+        for (int i = 0; i < word.size(); i++) {
+            for (int j = 0; j < columns; j++) {
+                char currentLetter = ' ';
+                if (j < word.get(i).length()) {
+                    currentLetter = word.get(i).charAt(j);
+                }
+                matrix[i][j] = currentLetter;
+            }
+        }
+        double result1 = (degree - 90) / 360.0;//1.00
+        int IntegerResult1 = (int) result1;//1.00
+        if (result1 - IntegerResult1 == 0) {
+            rotate90(rows,columns,matrix);
+        }
+
+        double result2=(degree-180)/360.0;
+        int IntegerResult2=(int) result2;
+        if(result2 - IntegerResult2==0){
+            rotate180(rows,columns,matrix);
+        }
+
+        double result3=(degree-270)/360.0;
+        int IntegerResult3=(int)result3;
+        if(result3-IntegerResult3==0){
+            rotate270(rows,columns,matrix);
+        }
+
+        double result4=(degree-360)/360.0;
+        int IntegerResult4=(int)result4;
+        if(result4-IntegerResult4==0 || degree==0){
+            originMatrix(rows,columns,matrix);
+        }
+    }
+    public static void rotate90(int rows,int columns,char[][] matrix){
+        for(int i=0;i<columns;i++){
+            for(int j=rows-1;j>=0;j--){
+                System.out.print(matrix[j][i]);
+            }
+            System.out.println();
+        }
+    }
+    public static void rotate180(int rows,int columns,char[][] matrix){
+        for(int i=rows-1;i>=0;i--){
+            for(int j=columns-1;j>=0;j--){
+                System.out.print(matrix[i][j]);
+            }
+            System.out.println();
+        }
+    }
+    public static void rotate270(int rows,int columns,char[][] matrix){
+        for(int i=columns-1; i>=0;i--){
+            for(int j=0;j<rows;j++){
+                System.out.print(matrix[j][i]);
+            }
+            System.out.println();
+        }
+    }
+    public static void originMatrix(int rows,int columns,char[][] matrix) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                System.out.print(matrix[i][j]);
+            }
+            System.out.println();
+        }
+    }
+}
