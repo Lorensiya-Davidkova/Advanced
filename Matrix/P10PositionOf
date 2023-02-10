@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+public class PositionOf {
+    public static void main(String[] args){
+        Scanner scanner=new Scanner(System.in);
+        String size=scanner.nextLine();
+        String[] arrSize1=size.split(" ");
+        int rows=Integer.parseInt(arrSize1[0]);
+        int columns=Integer.parseInt(arrSize1[1]);
+
+        int[][] matrix=new int[rows][columns];
+        for(int i=0;i<rows;i++){
+            String[] arrLine=scanner.nextLine().split(" ");
+            int[] rowElements=new int[arrLine.length];
+            for(int p=0;p<rowElements.length;p++){
+                rowElements[p]=Integer.parseInt(arrLine[p]);
+            }
+            for(int j=0;j<columns;j++){
+                matrix[i][j]=rowElements[j];
+            }
+        }
+
+        boolean otkrit=false;
+        int searchNumber=Integer.parseInt(scanner.nextLine());
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<columns;j++){
+                if(matrix[i][j]==searchNumber){
+                    System.out.println(i+" "+j);
+                    otkrit=true;
+                }
+            }
+        }
+        if(!otkrit){
+            System.out.println("not found");
+        }
+    }
+}
