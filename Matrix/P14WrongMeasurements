@@ -1,0 +1,69 @@
+import java.util.Scanner;
+public class WrongMeasurements {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int rows = Integer.parseInt(scanner.nextLine());
+        int columns = 0;
+
+        String line = scanner.nextLine();
+        String[] firstRow=line.split(" ");
+        columns=firstRow.length;
+
+        int[][] matrix=new int[rows][columns];
+        for(int j=0;j<firstRow.length;j++){
+            matrix[0][j]=Integer.parseInt(firstRow[j]);
+        }
+
+        for(int i=1;i<rows;i++){
+                String row=scanner.nextLine();
+                String[] rowElements=row.split(" ");
+                for(int j=0;j<rowElements.length;j++){
+                    matrix[i][j]=Integer.parseInt(rowElements[j]);
+                }
+            }
+        String[] indexes=scanner.nextLine().split(" ");
+        int currI=Integer.parseInt(indexes[0]);
+        int currJ=Integer.parseInt(indexes[1]);
+        int currElement=matrix[currI][currJ];
+
+        int [][] newMatrix=new int[rows][columns];
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<columns;j++){
+                if(matrix[i][j]==currElement){
+                    int top=0;
+                    int down=0;
+                    int left=0;
+                    int right=0;
+                    if(i-1>=0 && matrix[i-1][j]!=currElement) {
+                        top = matrix[i - 1][j];
+                    }
+
+                    if(i+1<rows && matrix[i+1][j]!=currElement) {
+                        down = matrix[i + 1][j];
+                    }
+                    if(j-1>=0 && matrix[i][j-1]!=currElement) {
+                        left = matrix[i][j - 1];
+                    }
+                    if(j+1<columns && matrix[i][j+1] != currElement) {
+                        right = matrix[i][j + 1];
+                    }
+                    newMatrix[i][j]=top+down+left+right;
+                }else{
+                    newMatrix[i][j]=matrix[i][j];
+                }
+            }
+        }
+
+        //System.out.println("Rows:"+rows);
+        //System.out.println("Columns:"+columns);
+
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<columns;j++){
+                System.out.print(newMatrix[i][j]+" ");
+            }
+            System.out.println();
+        }
+
+
+    }
+}
